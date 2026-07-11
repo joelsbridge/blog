@@ -184,6 +184,7 @@ highlighter : rouge
 permalink   : date
 
 exclude:
+  - CLAUDE.md
   - CHANGELOG.md
   - HOW_TO_RELEASE.md
   - Gemfile
