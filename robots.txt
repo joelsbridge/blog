@@ -1,1 +1,1 @@
-Sitemap: https://kitian616.github.io/jekyll-TeXt-theme/sitemap.xml
+Sitemap: /blog/sitemap.xml
