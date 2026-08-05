@@ -15,9 +15,7 @@ jobs:
           ruby-version: "3.3"
           bundler-cache: true
 
-      - run: cp -rfv docs/_includes .
-
-      - run: JEKYLL_ENV=production bundle exec jekyll build --config ./docs/_config.yml
+      - run: JEKYLL_ENV=production bundle exec jekyll build
 
       - uses: peaceiris/actions-gh-pages@v3
         with:
