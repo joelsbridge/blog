@@ -1,9 +1,11 @@
-FROM ruby:2.7
+# 对齐 CI（.github/workflows/gh-pages.yml 用 ruby 3.3）。
+# 原值 ruby:2.7 已 EOL，且当前依赖树（jekyll 4.4.x / activesupport 7.x）在其上无法构建。
+FROM ruby:3.3
 
 # Set default locale for the environment
-ENV LC_ALL C.UTF-8
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US.UTF-8
+ENV LC_ALL=C.UTF-8
+ENV LANG=en_US.UTF-8
+ENV LANGUAGE=en_US.UTF-8
 
 # throw errors if Gemfile has been modified since Gemfile.lock
 RUN bundle config --global frozen 1
