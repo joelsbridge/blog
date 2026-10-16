@@ -181,10 +181,17 @@ analytics:
 ##############################
 markdown    : kramdown
 highlighter : rouge
-# 注意：Jekyll 内置的 "date" 样式等价于 /:categories/:year/:month/:day/:title.html，
-# 也就是【分类会进 URL】。那样文章一旦换栏目，URL 就变，外链和搜索引擎收录会失效。
-# 这里显式写成不含 :categories 的形式，让 URL 与栏目解耦。
-permalink   : /:year/:month/:day/:title.html
+# 全局保持 Jekyll 内置的 "date" 样式。注意它等价于
+# /:categories/:year/:month/:day/:title.html —— 分类会进 URL，文章换栏目就会断链。
+# 所以【文章的 permalink 在下面 defaults 里单独覆盖】，全局值只用来定义
+# 普通页面（tech.html / about.md …）的行为。
+#
+# ⚠️ 不要把这里的全局值改成自定义字符串（例如 /:year/:month/:day/:title.html）：
+# Jekyll 只会把内置样式识别成符号，自定义字符串会让 site.permalink_style 变成 nil，
+# 结果是【所有页面】的 url 都丢掉 .html 后缀（page.url 变 /tech 而文件是 tech.html），
+# 进而弄坏导航高亮（header.html 拿 page.url 和导航项 URL 做字符串比较）、
+# 以及 sitemap 里的页面 URL。文章 URL 的解耦请用 defaults，见下方。
+permalink   : date
 
 exclude:
   - DEVELOPMENT.md
@@ -218,6 +225,10 @@ defaults:
       type: posts
     values:
       layout: article
+      # 文章 URL 与栏目解耦：去掉 Jekyll 内置 date 样式里的 :categories 段，
+      # 这样把文章从「技术」挪到「生活」不会改变它的 URL，外链不会失效。
+      # 页面（tech.html / about.md …）不受影响，仍走全局的 permalink: date。
+      permalink: /:year/:month/:day/:title.html
       sharing: true
       license: true
       aside:
