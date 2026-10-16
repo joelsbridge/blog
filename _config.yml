@@ -18,27 +18,27 @@
 ##############################
 text_skin: default # "default" (default), "dark", "forest", "ocean", "chocolate", "orange"
 highlight_theme: default # "default" (default), "tomorrow", "tomorrow-night", "tomorrow-night-eighties", "tomorrow-night-blue", "tomorrow-night-bright"
-url     : # the base hostname & protocol for your site e.g. https://www.someone.com
+url     : https://joelsbridge.github.io # TODO: 绑定自定义域名后改这里
 baseurl : "/blog" # does not include hostname
-title   : Your Site Title
-description: > # this means to ignore newlines until "Language & timezone"
-  Your Site Description
+title   : 雨落别枫桥 # TODO: 站点标题
+description: > # this means to ignore newlines until "Language & timezone"   TODO: 站点描述
+  记录技术，也记录生活。
 
 
 ## => Language and Timezone
 ##############################
-lang: # the language of your site, default as "en"
-timezone: # see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones for the available values
+lang: zh-Hans # the language of your site, default as "en"
+timezone: Asia/Shanghai # see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones for the available values
 
 
 ## => Author and Social
 ##############################
 author:
-  type      : # "person" (default), "organization"
-  name      : Your Name
+  type      : person # "person" (default), "organization"
+  name      : 雨落别枫桥 # TODO: 你的昵称
   url       :
-  avatar    : # path or url of avatar image (square)
-  bio       : I am an amazing person.
+  avatar    : # TODO: 头像图片路径，如 /assets/images/avatar.png (正方形)
+  bio       : 记录技术，也记录生活。 # TODO: 一句话简介
   email     :
   facebook  : # "user_name" the last part of your profile url, e.g. https://www.facebook.com/user_name
   twitter   : # "user_name" the last part of your profile url, e.g. https://twitter.com/user_name
@@ -49,13 +49,13 @@ author:
   zhihu     : # "user_name" the last part of your profile url, e.g. https://www.zhihu.com/people/user_name
   douban    : # "user_name" the last part of your profile url, e.g. https://www.douban.com/people/user_name
   linkedin  : # "user_name" the last part of your profile url, e.g. https://www.linkedin.com/in/user_name
-  github    : # "user_name" the last part of your profile url, e.g. https://github.com/user_name
+  github    : joelsbridge # "user_name" the last part of your profile url, e.g. https://github.com/user_name
   npm       : # "user_name" the last part of your profile url, e.g. https://www.npmjs.com/~user_name
 
 
 ## => GitHub Repository (if the site is hosted by GitHub)
 ##############################
-repository: user_name/repo_name
+repository: joelsbridge/blog
 repository_tree: master
 
 
@@ -181,12 +181,19 @@ analytics:
 ##############################
 markdown    : kramdown
 highlighter : rouge
-permalink   : date
+# 注意：Jekyll 内置的 "date" 样式等价于 /:categories/:year/:month/:day/:title.html，
+# 也就是【分类会进 URL】。那样文章一旦换栏目，URL 就变，外链和搜索引擎收录会失效。
+# 这里显式写成不含 :categories 的形式，让 URL 与栏目解耦。
+permalink   : /:year/:month/:day/:title.html
 
 exclude:
+  - DEVELOPMENT.md
+  - PROJECT-GUIDE.md
   - CLAUDE.md
   - CHANGELOG.md
   - HOW_TO_RELEASE.md
+  - Dockerfile.dev
+  - eslint.config.mjs
   - Gemfile
   - Gemfile.lock
   - LICENSE
@@ -196,10 +203,13 @@ exclude:
   - jekyll-text-theme.gemspec
   - package-lock.json
   - package.json
+  - screenshot.jpg
+  - /docker
   - /docs
   - /node_modules
   - /screenshots
   - /test
+  - /tools
   - /vendor
 
 defaults:
@@ -215,6 +225,20 @@ defaults:
       show_edit_on_github: true
       show_subscribe: true
       pageview: true
+
+  ## 栏目分类：Jekyll 不会从 _posts 的子目录推导 categories（它只看 _posts
+  ## 的【上层】目录），所以这里按路径显式注入，写作时就不用每篇手写了。
+  ## 新增栏目时，在下面照抄一段，并同步新建 <栏目名>.html 和导航项。
+  - scope:
+      path: "_posts/tech"
+      type: posts
+    values:
+      categories: tech
+  - scope:
+      path: "_posts/life"
+      type: posts
+    values:
+      categories: life
 
 
 ## => Plugins
