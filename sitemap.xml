@@ -1,20 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>/blog/2018/06/01/header-image.html</loc>
-<lastmod>2018-06-01T00:00:00+00:00</lastmod>
+<loc>https://joelsbridge.github.io/blog/2018/06/01/header-image.html</loc>
+<lastmod>2018-06-01T00:00:00+08:00</lastmod>
 </url>
 <url>
-<loc>/blog/2018/07/01/welcome.html</loc>
-<lastmod>2018-07-01T00:00:00+00:00</lastmod>
+<loc>https://joelsbridge.github.io/blog/2018/07/01/welcome.html</loc>
+<lastmod>2018-07-01T00:00:00+08:00</lastmod>
 </url>
 <url>
-<loc>/blog/about.html</loc>
+<loc>https://joelsbridge.github.io/blog/404</loc>
 </url>
 <url>
-<loc>/blog/archive.html</loc>
+<loc>https://joelsbridge.github.io/blog/about</loc>
 </url>
 <url>
-<loc>/blog/</loc>
+<loc>https://joelsbridge.github.io/blog/archive</loc>
+</url>
+<url>
+<loc>https://joelsbridge.github.io/blog/</loc>
+</url>
+<url>
+<loc>https://joelsbridge.github.io/blog/life</loc>
+</url>
+<url>
+<loc>https://joelsbridge.github.io/blog/tech</loc>
 </url>
 </urlset>
