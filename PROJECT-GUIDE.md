@@ -368,6 +368,18 @@ git diff upstream/master -- _layouts _includes _sass assets   # 只看引擎层�
 
 改引擎文件时，尽量**新增**而不是**原地修改**，能显著降低将来 merge 的成本。
 
+### 5.4 本地对主题源码的改动清单
+
+同步上游时，下面这些文件已经和上游不一致，merge 时要特别留意：
+
+| 文件 | 改动 | 原因 |
+| --- | --- | --- |
+| `_includes/extensions/bilibili.html` | 2026-10-18 重写 | 原版写死 `aid={{ include.id }}`，只能吃旧版 av 号。bilibili 已全面改用 BV 号，BV 号被当作 aid 传入会无法播放。改为按前缀自动判断：`BV` 开头 → `bvid=`，否则 → `aid=`；并支持 `page` 参数指定多 P 视频的第几集 |
+| `Dockerfile.dev` | 2026-10-16 | 基础镜像 `ruby:2.7` → `ruby:3.3`（对齐 CI），ENV 空格写法改为 `ENV KEY=VALUE` |
+| `_data/navigation.yml` | 2026-10-16 | 改写为中文单语导航，去掉原有的多语言锚点配置 |
+
+> 除此之外的引擎层文件均与上游 v2.2.6 保持一致。
+
 ---
 
 ## 6. 已知问题清单
