@@ -1,5 +1,26 @@
+{%- comment -%}
+  bilibili 播放器嵌入。
+
+  支持两种视频编号，按前缀自动判断：
+    - BV 号（现行主流）：id='BV1Gv4y1U75L'  →  bvid=BV1Gv4y1U75L
+    - av 号（旧版编号）：id='11091080'       →  aid=11091080
+
+  可选 page 参数用于多 P 视频，默认第 1 P：
+    {%- include extensions/bilibili.html id='BV1Gv4y1U75L' page='2' -%}
+
+  历史说明：本文件原先写死 aid={{ include.id }}，只能吃旧版 av 号。
+  bilibili 改版后分享链接普遍为 BV 号，BV 号被当作 aid 传入会导致播放器报错。
+{%- endcomment -%}
+{%- assign _bid = include.id | strip -%}
+{%- assign _prefix = _bid | slice: 0, 2 -%}
+{%- assign _page = include.page | default: 1 -%}
+{%- if _prefix == 'BV' -%}
+  {%- assign _query = 'bvid=' | append: _bid -%}
+{%- else -%}
+  {%- assign _query = 'aid=' | append: _bid -%}
+{%- endif -%}
 <div class="extensions extensions--video">
-  <iframe src="//player.bilibili.com/player.html?aid={{ include.id }}&page=1"
+  <iframe src="//player.bilibili.com/player.html?{{ _query }}&page={{ _page }}"
     frameborder="no" scrolling="no" allowfullscreen="true">
   </iframe>
 </div>
